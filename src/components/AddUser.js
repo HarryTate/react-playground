@@ -21,6 +21,7 @@ export default class addUser extends Component {
   render() {
     return (
       <div>
+        <h2>Add a user</h2>
         <form onSubmit={this.createUser}>
           <div className="form-group">
             <label htmlFor="Name">Name:</label>
