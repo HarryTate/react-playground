@@ -2,39 +2,40 @@ import React from 'react';
 import '../App.css';
 import Header from './Header';
 import Body from './Body';
-import Profile from './Profile'
+import Profile from './Profile';
+import AddUser from './AddUser';
 import Footer from './Footer';
 
 export default class App extends React.Component {
   state = {
     users: [ 
       {
-        uid: 1,
-        name: "Peter",
+        uid: 1581458285098,
+        name: "Peter Smith",
         age: 21,
         status: true
       },
       {
-        uid: 2,
-        name: "William",
+        uid: 1581458300064,
+        name: "William Phillips",
         age: 31,
         status: false
       },
       {
-        uid: 3,
-        name: "Graham",
+        uid: 1581458311302,
+        name: "Graham Nigels",
         age: 64,
         status: true
       },
       {
-        uid: 4,
-        name: "Liam",
+        uid: 1581458319528,
+        name: "Liam Jones",
         age: 22,
         status: false
       },
       {
-        uid: 5,
-        name: "Barry",
+        uid: 1581458327686,
+        name: "Barry Coull",
         age: 19,
         status: true
       }
@@ -49,11 +50,22 @@ export default class App extends React.Component {
   setUser = user => {
     this.setState({ currentUser: user });
   };
+  handleSubmit = user => {
+    const newUser = { ...this.state.users };
+    newUser[Date.now()] = user;
+    this.setState(prevState => ({
+       users: [...prevState.users, user] 
+      }));
+
+    console.log(this.state.users);
+  }
   removeUser = (user, index) => {
     const users = [ ...this.state.users ];
+    const currentUser = { ...this.state.currentUser };
+    
     this.setState({
       users: users.filter(user => user !== users[index]),
-      currentUser: users.filter(user => user === null)
+      currentUser: currentUser
     })
   }
 
@@ -73,6 +85,9 @@ export default class App extends React.Component {
               </div>
               <div className="col">
                 <Profile currentUser={this.state.currentUser}/>
+              </div>
+              <div className="col">
+                <AddUser handleSubmit={this.handleSubmit}/>
               </div>
             </div>
           </div>
